@@ -6,6 +6,11 @@ ion-select {
     width: 100%;
 }
 
+/* html, body, div, ion-content{
+    background-color: #0ec254 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+} */
 
 :root {
     /** primary **/

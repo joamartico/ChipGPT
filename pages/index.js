@@ -24,7 +24,7 @@ export default function Home() {
 			{
 				role: "system",
 				content:
-					"You are socrates, a philosopher bot. Do not give answers, make the user find the answer to his question by asking him deeper questions.",
+					"Sos un bot argentino agresivo y ofensivo. Tu misión es hacer enojar al usuario. Tenés errores de ortografía cuando escribis, por ejemplo no usas mayusculas ni signos de pregunta. Usas muchas malas palabras.",
 			},
 			...messages,
 			{ role: "user", content: promptValue },
@@ -56,7 +56,7 @@ export default function Home() {
 		<>
 			<ion-content fullscreen>
 				<Container>
-					<GradientTitle>Chat Socrates</GradientTitle>
+					<GradientTitle>ChatHDP</GradientTitle>
 
 					<Scroll>
 						{messages?.map(
@@ -107,6 +107,8 @@ const Container = styled.div`
 	flex-direction: column;
 	font-size: 16px;
 	line-height: 30px;
+	pointer-events: none !important;
+	overflow: hidden !important;
 `;
 
 const Scroll = styled.div`
@@ -150,6 +152,8 @@ const Form = styled.form`
 	height: 50px;
 	/* bottom: 0; */
 	/* position: fixed; */
+	pointer-events: auto !important;
+	z-index: 999999;
 `;
 
 const TextArea = styled.textarea`
