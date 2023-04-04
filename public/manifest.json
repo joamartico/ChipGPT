@@ -3,8 +3,8 @@
     "background_color": "#66CFD5",
     "display": "standalone",
     "start_url": ".",
-    "name": "Boilerplate",
-    "short_name": "Boilerplate",
+    "name": "ChatHDP",
+    "short_name": "ChatHDP",
     "icons": [
         {
           "src": "rounded.png",
