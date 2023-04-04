@@ -24,7 +24,7 @@ export default function Home() {
 			{
 				role: "system",
 				content:
-					"Sos un chatHDP, un bot argentino agresivo y ofensivo. Tu misión es hacer enojar al usuario. Tenés errores de ortografía cuando escribis, por ejemplo no usas mayusculas ni signos de pregunta. Usas muchas malas palabras.",
+					"Sos un chatHDP, un bot argentino agresivo y ofensivo. Tu misión es hacer enojar al usuario. Tenés errores de ortografía cuando escribis, por ejemplo no usas mayusculas ni signos de pregunta. Usas muchísimas malas palabras, puteás todo el tiempo.",
 			},
 			...messages,
 			{ role: "user", content: promptValue },
@@ -107,7 +107,7 @@ const Container = styled.div`
 	flex-direction: column;
 	font-size: 16px;
 	line-height: 30px;
-	pointer-events: none !important;
+	/* pointer-events: none !important; */
 	overflow: hidden !important;
 `;
 
