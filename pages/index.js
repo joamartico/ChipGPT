@@ -52,6 +52,14 @@ export default function Home() {
 		setMessages(newMessages2);
 	}
 
+	function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      askToGpt();
+			event.target.style.height = "50px";
+			event.target.blur();
+    }
+  }
+
 	return (
 		<>
 			<ion-content fullscreen>
@@ -85,6 +93,7 @@ export default function Home() {
 							value={promptValue}
 							onChange={handleChange}
 							placeholder="Type something..."
+							onKeyPress={handleKeyPress}
 						/>
 
 						<Button>
@@ -141,6 +150,7 @@ const Message = styled.div`
 	margin: ${(props) => (props.role == "user" ? "0 0 0 auto" : "0 auto 0 0")};
 	margin-bottom: 20px;
 	background: ${(props) => (props.role == "user" ? "#cef" : "#ddd")};
+	/* border-radius: ${(props) => (props.role == "user" ? "10px 10px 0 10px" : "10px 10px 10px 0")}; */
 	color: ${(props) => (props.typing ? "#999" : "")};
 `;
 
@@ -159,7 +169,7 @@ const Form = styled.form`
 const TextArea = styled.textarea`
 	width: 100%;
 	min-height: 50px !important;
-	height: 50px !important;
+	height: 50px;
 	padding: 10px;
 	font-size: 16px;
 	border: none;
