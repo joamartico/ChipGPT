@@ -6,11 +6,25 @@ ion-select {
     width: 100%;
 }
 
-/* html, body, div, ion-content{
-    background-color: #0ec254 !important;
-    overflow: hidden !important;
-    pointer-events: none !important;
-} */
+
+body {
+    /* smooth gradient background (gray, or skyblue)*/
+    background: linear-gradient(90deg, #f4f5f8 0%, #f4f5f8 100%);
+}
+
+
+
+@media screen and (min-width: 700px) {
+    ion-app {
+        max-width: 600px;
+        border-radius: 12px;
+        top: 0 !important;
+        height: 100vh !important;
+        position: absolute !important;
+        left: 50vw !important;
+       transform: translateX(-50%) !important;
+    }
+}
 
 :root {
     /** primary **/

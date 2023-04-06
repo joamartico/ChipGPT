@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -8,6 +8,8 @@ export default function Home() {
 	const [promptValue, setPromptValue] = useState("");
 	const [messages, setMessages] = useState([]);
 	const [isTyping, setIsTyping] = useState(false);
+	const textAreaRef = useRef();
+	const scrollRef = useRef();
 
 	const handleChange = (event) => {
 		setPromptValue(event.target.value);
@@ -19,6 +21,8 @@ export default function Home() {
 
 	async function askToGpt() {
 		setPromptValue("");
+		textAreaRef.current.style.height = "0px";
+		textAreaRef.current.blur();
 		setIsTyping(true);
 		const newMessages = [
 			{
@@ -29,8 +33,11 @@ export default function Home() {
 			...messages,
 			{ role: "user", content: promptValue },
 		];
-		setMessages(newMessages);
-
+		await setMessages(newMessages);
+		scrollRef.current.scrollTo({
+			top: scrollRef.current.scrollHeight,
+			behavior: "smooth",
+		});
 		const response = await fetch(API_URL, {
 			method: "POST",
 			headers: {
@@ -50,15 +57,11 @@ export default function Home() {
 		const newMessages2 = [...newMessages, data.choices[0].message];
 		setIsTyping(false);
 		setMessages(newMessages2);
+		scrollRef.current.scrollTo({
+			top: scrollRef.current.scrollHeight,
+			behavior: "smooth",
+		});
 	}
-
-	function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      askToGpt();
-			event.target.style.height = "50px";
-			event.target.blur();
-    }
-  }
 
 	return (
 		<>
@@ -66,7 +69,7 @@ export default function Home() {
 				<Container>
 					<GradientTitle>ChatHDP</GradientTitle>
 
-					<Scroll>
+					<Scroll ref={scrollRef}>
 						{messages?.map(
 							(message) =>
 								message.content &&
@@ -93,7 +96,12 @@ export default function Home() {
 							value={promptValue}
 							onChange={handleChange}
 							placeholder="Type something..."
-							onKeyPress={handleKeyPress}
+							onKeyPress={(event) => {
+								if (event.key === "Enter") {
+									askToGpt();
+								}
+							}}
+							ref={textAreaRef}
 						/>
 
 						<Button>
@@ -107,16 +115,13 @@ export default function Home() {
 }
 const Container = styled.div`
 	margin: auto;
-	/* margin-top: 100px; */
-	width: 90vw;
+	width: 100%;
 	max-width: 700px;
 	height: 100%;
 	display: flex;
-	/* justify-content: center; */
 	flex-direction: column;
 	font-size: 16px;
 	line-height: 30px;
-	/* pointer-events: none !important; */
 	overflow: hidden !important;
 `;
 
@@ -125,7 +130,6 @@ const Scroll = styled.div`
 	max-height: 100%;
 	width: 100%;
 	overflow-y: scroll;
-	margin-bottom: 20px;
 `;
 
 const GradientTitle = styled.h1`
@@ -137,40 +141,48 @@ const GradientTitle = styled.h1`
 	-webkit-text-fill-color: transparent;
 	text-align: left;
 	margin-bottom: 15px;
-	/* margin-top: -100px; */
+	margin-left: 20px;
+	margin-bottom: 30px;
 `;
 
 const Message = styled.div`
-	/* width: 100%; */
 	max-width: 80%;
 	width: fit-content;
 	background: #cef;
 	border-radius: 10px;
 	padding: 5px 15px;
-	margin: ${(props) => (props.role == "user" ? "0 0 0 auto" : "0 auto 0 0")};
+	margin: ${(props) =>
+		props.role == "user" ? "0 20px 0 auto" : "0 auto 0 20px"};
 	margin-bottom: 20px;
 	background: ${(props) => (props.role == "user" ? "#cef" : "#ddd")};
-	/* border-radius: ${(props) => (props.role == "user" ? "10px 10px 0 10px" : "10px 10px 10px 0")}; */
+	/* border-radius: ${(props) =>
+		props.role == "user" ? "10px 10px 0 10px" : "10px 10px 10px 0"}; */
 	color: ${(props) => (props.typing ? "#999" : "")};
 `;
 
 const Form = styled.form`
 	width: 100%;
 	display: flex;
-	padding: 10px;
-	margin-bottom: 16%;
-	height: 50px;
-	/* bottom: 0; */
-	/* position: fixed; */
+	padding: 10px 20px;
+	padding-top: 15px;
+	margin-bottom: 12%;
+	height: 20px;
+	padding-bottom: 40px;
 	pointer-events: auto !important;
 	z-index: 999999;
+	box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const TextArea = styled.textarea`
 	width: 100%;
-	min-height: 50px !important;
-	height: 50px;
-	padding: 10px;
+	min-height: 42px;
+	padding: 5px;
+	padding-left: 12px;
+	@media screen and (min-width: 700px) {
+		min-height: 50px;
+		padding: 10px;
+		padding-left: 15px;
+	}
 	font-size: 16px;
 	border: none;
 	border-radius: 10px;
@@ -185,8 +197,7 @@ const TextArea = styled.textarea`
 const Button = styled.button`
 	background-color: #0072ff;
 	/* width: 100%; */
-	width: 50px !important;
-	height: 50px !important;
+	flex-shrink: 0;
 	color: #fff;
 	border: none;
 	border-radius: 10px;
@@ -201,6 +212,19 @@ const Button = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 0 !important;
 	text-align: center;
 	background: linear-gradient(to right, #00c6ff, #0072ff);
+	width: 42px;
+	height: 42px;
+	@media screen and (min-width: 700px) {
+		height: 50px;
+		width: 50px;
+		padding: 10px;
+		padding-left: 15px;
+	}
+	/* decrease opacity onClick */
+	&:active {
+		opacity: 0.5;
+	}
 `;
