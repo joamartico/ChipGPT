@@ -34,12 +34,13 @@ function MyApp({ Component, pageProps }) {
 				<title>ChatHDP</title>
 				<meta
 					name="description"
-					content="ChatHDP is your web app to search and track your food and nutrition."
+					content="ChatHDP es un bot argentino que te va a cagar a puteadas."
 				/>
 				<meta
 					name="keywords"
 					content="nutrition, food, vitamins, minerals"
 				/>
+				<meta name="google-site-verification" content="3XoSVdS7QLQWutddbE1sJ60XT3mFR-WXrP80V4AharU" />
 				{/*  PWA  */}
 				<meta
 					name="viewport"
