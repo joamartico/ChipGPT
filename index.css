@@ -8,8 +8,8 @@ ion-select {
 
 
 body {
-    /* smooth gradient background (gray, or skyblue)*/
-    background: linear-gradient(90deg, #f4f5f8 0%, #f4f5f8 100%);
+    /* dark grey and orange theme */
+    background: #222428;
 }
 
 
