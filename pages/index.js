@@ -28,7 +28,7 @@ export default function Home() {
 			{
 				role: "system",
 				content:
-					"Sos un chatHDP, un bot argentino agresivo y ofensivo. Tu misión es hacer enojar al usuario. Usas muchísimas malas palabras, puteás e insultás todo el tiempo.",
+					"You are an electronics component assistant called ChipGPT. You help the user find the perfect component to his project.",
 			},
 			...messages,
 			{ role: "user", content: promptValue },
@@ -48,7 +48,7 @@ export default function Home() {
 				model: "gpt-3.5-turbo",
 				messages: newMessages,
 				// stream: true,
-				temperature: 0.6,
+				temperature: 0.5,
 				stop: ["\ninfo:"],
 			}),
 		});
@@ -67,7 +67,7 @@ export default function Home() {
 		<>
 			<ion-content fullscreen>
 				<Container>
-					<GradientTitle>ChatHDP</GradientTitle>
+					<Title>ChipGPT</Title>
 
 					<Scroll ref={scrollRef}>
 						{messages?.map(
@@ -132,13 +132,11 @@ const Scroll = styled.div`
 	overflow-y: scroll;
 `;
 
-const GradientTitle = styled.h1`
+const Title = styled.h1`
 	font-size: 2rem;
 	font-family: "Montserrat", "Open Sans", sans-serif;
 	font-weight: bold;
-	background: linear-gradient(to right, #00c6ff, #0072ff);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: darkorange;
 	text-align: left;
 	margin-bottom: 15px;
 	margin-left: 20px;
@@ -195,26 +193,19 @@ const TextArea = styled.textarea`
 `;
 
 const Button = styled.button`
-	background-color: #0072ff;
-	/* width: 100%; */
+	background-color: darkorange;
 	flex-shrink: 0;
-	color: #fff;
+	color: #333;
 	border: none;
 	border-radius: 10px;
 	font-size: 16px;
 	font-weight: bold;
 	cursor: pointer;
-	&:active {
-		background-color: #00c6ff;
-	}
-	/* font-weight: bold; */
-	/* font-family: "Montserrat", "Open Sans", sans-serif; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 0 !important;
 	text-align: center;
-	background: linear-gradient(to right, #00c6ff, #0072ff);
 	width: 42px;
 	height: 42px;
 	@media screen and (min-width: 700px) {
@@ -223,7 +214,6 @@ const Button = styled.button`
 		padding: 10px;
 		padding-left: 15px;
 	}
-	/* decrease opacity onClick */
 	&:active {
 		opacity: 0.5;
 	}
