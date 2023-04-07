@@ -1,13 +1,33 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const OPENAI_API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+const GOOGLE_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
 const API_URL = "https://api.openai.com/v1/chat/completions";
+const cx = "c194a50057af541b6";
+
+const fetchImage = (query) => {
+	return fetch(
+		`https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${cx}&q=${query}&searchType=image`
+	)
+		.then((response) => response.json())
+		.then((_data) => {
+			const imageUrl = _data.items[0].link;
+			return imageUrl;
+		});
+};
 
 export default function Home() {
 	const [promptValue, setPromptValue] = useState("");
-	const [messages, setMessages] = useState([]);
+	const [messages, setMessages] = useState([
+		{
+			role: "system",
+			content:
+				"You are an electronics component assistant called ChipGPT. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>",
+		},
+	]);
 	const [isTyping, setIsTyping] = useState(false);
+	const [images, setImages] = useState([]);
 	const textAreaRef = useRef();
 	const scrollRef = useRef();
 
@@ -17,6 +37,8 @@ export default function Home() {
 			event.target.style.height = "auto";
 			event.target.style.height = event.target.scrollHeight + "px";
 		}
+		console.log(images);
+		console.log(messages);
 	};
 
 	async function askToGpt() {
@@ -25,11 +47,6 @@ export default function Home() {
 		textAreaRef.current.blur();
 		setIsTyping(true);
 		const newMessages = [
-			{
-				role: "system",
-				content:
-					"You are an electronics component assistant called ChipGPT. You help the user find the perfect component to his project.",
-			},
 			...messages,
 			{ role: "user", content: promptValue },
 		];
@@ -42,18 +59,19 @@ export default function Home() {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${API_KEY}`,
+				Authorization: `Bearer ${OPENAI_API_KEY}`,
 			},
 			body: JSON.stringify({
 				model: "gpt-3.5-turbo",
 				messages: newMessages,
 				// stream: true,
-				temperature: 0.5,
+				temperature: 0.1,
 				stop: ["\ninfo:"],
 			}),
 		});
 
 		const data = await response.json();
+		console.log(data);
 		const newMessages2 = [...newMessages, data.choices[0].message];
 		setIsTyping(false);
 		setMessages(newMessages2);
@@ -61,6 +79,18 @@ export default function Home() {
 			top: scrollRef.current.scrollHeight,
 			behavior: "smooth",
 		});
+
+		const componentsName = data.choices[0]?.message.content.split("// ")[1];
+		const queries = componentsName?.split(" or ");
+		const promises = queries.map((query) => fetchImage(query));
+		const newImgs = await Promise.all(promises);
+		setImages((prev) => [...prev, "", newImgs]);
+		
+		scrollRef.current.scrollTo({
+			top: scrollRef.current.scrollHeight,
+			behavior: "smooth",
+		});
+
 	}
 
 	return (
@@ -71,12 +101,21 @@ export default function Home() {
 
 					<Scroll ref={scrollRef}>
 						{messages?.map(
-							(message) =>
+							(message, i) =>
 								message.content &&
 								message.role != "system" && (
-									<Message role={message.role}>
-										{message.content}
-									</Message>
+									<>
+										<Message role={message.role}>
+											{message.content}
+										</Message>
+
+										{images[i - 1] &&
+											images[i - 1].map((image) => (
+												<Message role={message.role}>
+													<Img src={image} />
+												</Message>
+											))}
+									</>
 								)
 						)}
 						{isTyping && (
@@ -150,12 +189,21 @@ const Message = styled.div`
 	border-radius: 10px;
 	padding: 5px 15px;
 	margin: ${(props) =>
-		props.role == "user" ? "0 20px 0 auto" : "0 auto 0 20px"};
-	margin-bottom: 20px;
+		props.role == "user" ? "0 20px 20px auto" : "0 auto 20px 20px"};
 	background: ${(props) => (props.role == "user" ? "#cef" : "#ddd")};
 	/* border-radius: ${(props) =>
 		props.role == "user" ? "10px 10px 0 10px" : "10px 10px 10px 0"}; */
 	color: ${(props) => (props.typing ? "#999" : "")};
+`;
+
+const Img = styled.img`
+	border-radius: 10px;
+	max-width: 70%;
+	margin: 15px auto;
+	justify-content: center;
+	align-items: center;
+	justify-self: center;
+	display: flex;
 `;
 
 const Form = styled.form`
