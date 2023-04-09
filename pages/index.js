@@ -209,7 +209,7 @@ const Img = styled.img`
 
 const Form = styled.form`
 background: #145D40;
-/* box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.6); */
+box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.2);
 	width: 100%;
 	display: flex;
 	padding: 10px 20px;
