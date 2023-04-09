@@ -23,7 +23,7 @@ export default function Home() {
 		{
 			role: "system",
 			content:
-				"You are an electronics component assistant called ChipGPT. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>",
+				"You are an electronics component assistant called ChatPCB. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>.",
 		},
 	]);
 	const [isTyping, setIsTyping] = useState(false);
@@ -65,7 +65,7 @@ export default function Home() {
 				model: "gpt-3.5-turbo",
 				messages: newMessages,
 				// stream: true,
-				temperature: 0.1,
+				temperature: 0.0,
 				stop: ["\ninfo:"],
 			}),
 		});
@@ -80,24 +80,23 @@ export default function Home() {
 			behavior: "smooth",
 		});
 
-		const componentsName = data.choices[0]?.message.content.split("// ")[1];
+		const componentsName = data.choices[0]?.message.content.split("//")[1];
 		const queries = componentsName?.split(" or ");
 		const promises = queries.map((query) => fetchImage(query));
 		const newImgs = await Promise.all(promises);
 		setImages((prev) => [...prev, "", newImgs]);
-		
+
 		scrollRef.current.scrollTo({
 			top: scrollRef.current.scrollHeight,
 			behavior: "smooth",
 		});
-
 	}
 
 	return (
 		<>
 			<ion-content fullscreen>
 				<Container>
-					<Title>ChipGPT</Title>
+					<Title>ChatPCB</Title>
 
 					<Scroll ref={scrollRef}>
 						{messages?.map(
@@ -111,7 +110,7 @@ export default function Home() {
 
 										{images[i - 1] &&
 											images[i - 1].map((image) => (
-												<Message role={message.role}>
+												<Message role={message.role} style={{marginTop: -12}}>
 													<Img src={image} />
 												</Message>
 											))}
@@ -153,6 +152,7 @@ export default function Home() {
 	);
 }
 const Container = styled.div`
+	background-color: #038D1B;
 	margin: auto;
 	width: 100%;
 	max-width: 700px;
@@ -175,11 +175,12 @@ const Title = styled.h1`
 	font-size: 2rem;
 	font-family: "Montserrat", "Open Sans", sans-serif;
 	font-weight: bold;
-	color: darkorange;
+	color: #ffe99b;
 	text-align: left;
 	margin-bottom: 15px;
 	margin-left: 20px;
 	margin-bottom: 30px;
+	
 `;
 
 const Message = styled.div`
@@ -207,16 +208,16 @@ const Img = styled.img`
 `;
 
 const Form = styled.form`
+background: #145D40;
+/* box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.6); */
 	width: 100%;
 	display: flex;
 	padding: 10px 20px;
 	padding-top: 15px;
-	margin-bottom: 12%;
+	padding-bottom: calc(15% + env(safe-area-inset-bottom));
 	height: 20px;
-	padding-bottom: 40px;
 	pointer-events: auto !important;
 	z-index: 999999;
-	box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
 const TextArea = styled.textarea`
@@ -241,9 +242,9 @@ const TextArea = styled.textarea`
 `;
 
 const Button = styled.button`
-	background-color: darkorange;
 	flex-shrink: 0;
-	color: #333;
+	color: #2D322F;
+	background: #ffe99b;
 	border: none;
 	border-radius: 10px;
 	font-size: 16px;

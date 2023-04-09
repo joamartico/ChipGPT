@@ -3,8 +3,8 @@
     "background_color": "#66CFD5",
     "display": "standalone",
     "start_url": ".",
-    "name": "ChipGPT",
-    "short_name": "ChipGPT",
+    "name": "ChatPCB",
+    "short_name": "ChatPCB",
     "icons": [
         {
           "src": "rounded.png",

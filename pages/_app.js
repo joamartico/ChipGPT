@@ -31,10 +31,10 @@ function MyApp({ Component, pageProps }) {
 			<Head>
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				{/* SEO  */}
-				<title>ChipGPT</title>
+				<title>ChatPCB</title>
 				<meta
 					name="description"
-					content="ChipGPT es un bot argentino que te va a cagar a puteadas."
+					content="ChatPCB es un bot argentino que te va a cagar a puteadas."
 				/>
 				<meta
 					name="keywords"

@@ -10,7 +10,9 @@ ion-select {
 body {
     /* dark grey and orange theme */
     /* background: #222428; */
-    background: #626468;
+    background: rgba(255, 255, 255, 0.679);
+    /* PCB COLOR */
+    /* background: #05821B; */
 }
 
 
