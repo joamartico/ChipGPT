@@ -34,11 +34,11 @@ function MyApp({ Component, pageProps }) {
 				<title>ChatPCB</title>
 				<meta
 					name="description"
-					content="ChatPCB es un bot argentino que te va a cagar a puteadas."
+					content="ChatPCB helps you find the perfect electronic components for your project."
 				/>
 				<meta
 					name="keywords"
-					content="nutrition, food, vitamins, minerals"
+					content="electronics, pcb, components"
 				/>
 				<meta name="google-site-verification" content="3XoSVdS7QLQWutddbE1sJ60XT3mFR-WXrP80V4AharU" />
 
