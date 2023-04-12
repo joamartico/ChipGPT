@@ -25,9 +25,13 @@ export default function Home() {
 			content:
 				"You are an electronics component assistant called ChatPCB. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>.",
 		},
+		{
+			role: "assistant",
+			content: "Hello! How can I assist you today in finding the perfect electronics component for your project?",
+		}
 	]);
 	const [isTyping, setIsTyping] = useState(false);
-	const [images, setImages] = useState([]);
+	const [images, setImages] = useState([""]);
 	const textAreaRef = useRef();
 	const scrollRef = useRef();
 
@@ -95,7 +99,7 @@ export default function Home() {
 	return (
 		<>
 			<ion-content fullscreen>
-				<Container>
+				<PCB>
 					<Title>ChatPCB</Title>
 
 					<Scroll ref={scrollRef}>
@@ -110,7 +114,10 @@ export default function Home() {
 
 										{images[i - 1] &&
 											images[i - 1].map((image) => (
-												<Message role={message.role} style={{marginTop: -12}}>
+												<Message
+													role={message.role}
+													style={{ marginTop: -12 }}
+												>
 													<Img src={image} />
 												</Message>
 											))}
@@ -146,13 +153,13 @@ export default function Home() {
 							<ion-icon size={30} name="paper-plane" />
 						</Button>
 					</Form>
-				</Container>
+				</PCB>
 			</ion-content>
 		</>
 	);
 }
-const Container = styled.div`
-	background-color: #038D1B;
+const PCB = styled.div`
+  background: radial-gradient(ellipse at center, #238B26 20%, #3EB73F 100%); /* green radial background gradient */
 	margin: auto;
 	width: 100%;
 	max-width: 700px;
@@ -180,7 +187,6 @@ const Title = styled.h1`
 	margin-bottom: 15px;
 	margin-left: 20px;
 	margin-bottom: 30px;
-	
 `;
 
 const Message = styled.div`
@@ -208,8 +214,9 @@ const Img = styled.img`
 `;
 
 const Form = styled.form`
-background: #145D40;
-box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.2);
+	background: none; 
+	/* background: #145D40; */
+	/* box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.2); */
 	width: 100%;
 	display: flex;
 	padding: 10px 20px;
@@ -218,6 +225,8 @@ box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.2);
 	height: 20px;
 	pointer-events: auto !important;
 	z-index: 999999;
+	/* border-top: 5px solid #238B26; */
+	border-top: 2px solid #ffe99b;
 `;
 
 const TextArea = styled.textarea`
@@ -243,8 +252,10 @@ const TextArea = styled.textarea`
 
 const Button = styled.button`
 	flex-shrink: 0;
-	color: #2D322F;
-	background: #ffe99b;
+	/* background: #ffe99b; */
+	/* color: #2D322F; */
+	background: #2d322f;
+	color: white;
 	border: none;
 	border-radius: 10px;
 	font-size: 16px;
