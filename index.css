@@ -10,7 +10,7 @@ ion-select {
 body {
     /* dark grey and orange theme */
     /* background: #222428; */
-    background: rgb(227, 227, 227);
+    background: rgb(255, 255, 255);
     /* PCB COLOR */
     /* background: #05821B; */
 }
@@ -19,15 +19,13 @@ body {
 
 @media screen and (min-width:  1000px) {
     ion-app {
-        /* max-width: 700px; */
-        box-shadow: 0 10px 25px 0 rgba(0,0,0,.08);
-        width: 450px;
-        height: 90vh !important;
-        border-radius: 5px;
-        top: 0 !important;
-        position: absolute !important;
-        left: 50vw !important;
-        transform: translate(-50%, 5%);
+        /* width: 450px; */
+        /* height: 90vh !important; */
+        /* border-radius: 5px; */
+        /* top: 0 !important; */
+        /* position: absolute !important; */
+        /* left: 50vw !important;
+        transform: translate(-50%, 5%); */
     }
 
     ion-modal {

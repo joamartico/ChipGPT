@@ -27,8 +27,9 @@ export default function Home() {
 		},
 		{
 			role: "assistant",
-			content: "Hello! How can I assist you today in finding the perfect electronics component for your project?",
-		}
+			content:
+				"Hello! How can I assist you today in finding the perfect electronics component for your project?",
+		},
 	]);
 	const [isTyping, setIsTyping] = useState(false);
 	const [images, setImages] = useState([""]);
@@ -159,7 +160,11 @@ export default function Home() {
 	);
 }
 const PCB = styled.div`
-  background: radial-gradient(ellipse at center, #238B26 20%, #3EB73F 100%); /* green radial background gradient */
+	background: radial-gradient(
+		ellipse at center,
+		#238b26 20%,
+		#3eb73f 100%
+	); /* green radial background gradient */
 	margin: auto;
 	width: 100%;
 	max-width: 700px;
@@ -168,7 +173,16 @@ const PCB = styled.div`
 	flex-direction: column;
 	font-size: 16px;
 	line-height: 30px;
-	overflow: hidden !important;
+	overflow: visible !important;
+	box-shadow: -0px 4px 30px rgba(0, 0, 0, 0.5) !important; /* shadow */
+	border-radius: 10px;
+	
+	@media screen and (min-width: 1000px) {
+		width: 450px;
+		height: 90% !important;
+		margin: auto !important;
+		transform: translateY(5%);
+	}
 `;
 
 const Scroll = styled.div`
@@ -214,7 +228,7 @@ const Img = styled.img`
 `;
 
 const Form = styled.form`
-	background: none; 
+	background: none;
 	/* background: #145D40; */
 	/* box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.2); */
 	width: 100%;
