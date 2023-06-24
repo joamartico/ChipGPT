@@ -17,6 +17,7 @@ const fetchImage = (query) => {
 		});
 };
 
+
 export default function Home() {
 	const [promptValue, setPromptValue] = useState("");
 	const [messages, setMessages] = useState([
