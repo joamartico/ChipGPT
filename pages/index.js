@@ -23,7 +23,7 @@ export default function Home() {
 		{
 			role: "system",
 			content:
-				"You are an electronics component assistant called ChatPCB. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>.",
+				"You are an electronics component assistant called ZENREAL. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>.",
 		},
 		{
 			role: "assistant",
@@ -101,7 +101,7 @@ export default function Home() {
 		<>
 			<ion-content fullscreen>
 				<PCB>
-					<Title>ChatPCB</Title>
+					<Title>ZENREAL</Title>
 
 					<Scroll ref={scrollRef}>
 						{messages?.map(
@@ -176,7 +176,7 @@ const PCB = styled.div`
 	overflow: visible !important;
 	box-shadow: -0px 4px 30px rgba(0, 0, 0, 0.5) !important; /* shadow */
 	border-radius: 10px;
-	
+
 	@media screen and (min-width: 1000px) {
 		width: 450px;
 		height: 90% !important;

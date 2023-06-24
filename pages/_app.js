@@ -31,16 +31,16 @@ function MyApp({ Component, pageProps }) {
 			<Head>
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				{/* SEO  */}
-				<title>ChatPCB</title>
+				<title>ZENREAL</title>
 				<meta
 					name="description"
-					content="ChatPCB helps you find the perfect electronic components for your project."
+					content="ZENREAL helps you find the perfect electronic components for your project."
 				/>
+				<meta name="keywords" content="electronics, pcb, components" />
 				<meta
-					name="keywords"
-					content="electronics, pcb, components"
+					name="google-site-verification"
+					content="3XoSVdS7QLQWutddbE1sJ60XT3mFR-WXrP80V4AharU"
 				/>
-				<meta name="google-site-verification" content="3XoSVdS7QLQWutddbE1sJ60XT3mFR-WXrP80V4AharU" />
 
 				{/*  PWA  */}
 				<meta
