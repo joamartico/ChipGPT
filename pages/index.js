@@ -17,14 +17,13 @@ const fetchImage = (query) => {
 		});
 };
 
-
 export default function Home() {
 	const [promptValue, setPromptValue] = useState("");
 	const [messages, setMessages] = useState([
 		{
 			role: "system",
 			content:
-				"You are an electronics component assistant called ZENREAL. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>.",
+				"You are an electronics component assistant called ChatPCB. You help the user find the perfect component to his project. Finish your message with: // <COMPONENT-NAME>.",
 		},
 		{
 			role: "assistant",
@@ -102,7 +101,7 @@ export default function Home() {
 		<>
 			<ion-content fullscreen>
 				<PCB>
-					<Title>ZENREAL</Title>
+					<Title>ChatPCB</Title>
 
 					<Scroll ref={scrollRef}>
 						{messages?.map(

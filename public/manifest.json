@@ -3,8 +3,8 @@
     "background_color": "#66CFD5",
     "display": "standalone",
     "start_url": ".",
-    "name": "ZENREAL",
-    "short_name": "ZENREAL",
+    "name": "ChatPCB",
+    "short_name": "ChatPCB",
     "icons": [
         {
           "src": "rounded.png",
