@@ -110,7 +110,16 @@ export default function Home() {
 								message.role != "system" && (
 									<>
 										<Message role={message.role}>
-											{message.content}
+											{message.content
+												.split("\n")
+												.map((item, key) => {
+													return (
+														<>
+															{item}
+															<br />
+														</>
+													);
+												})}
 										</Message>
 
 										{images[i - 1] &&
@@ -235,21 +244,25 @@ const Form = styled.form`
 	display: flex;
 	padding: 10px 20px;
 	padding-top: 15px;
-	padding-bottom: calc(15% + env(safe-area-inset-bottom));
-	height: 20px;
+	/* padding-bottom: calc(15% + env(safe-area-inset-bottom)); */
+	padding-bottom: calc(15px + env(safe-area-inset-bottom));
+	/* height: 20px; */
 	pointer-events: auto !important;
 	z-index: 999999;
 	/* border-top: 5px solid #238B26; */
 	border-top: 2px solid #ffe99b;
+	align-items: flex-end;
 `;
 
 const TextArea = styled.textarea`
 	width: 100%;
 	min-height: 42px;
+	height: 42px;
 	padding: 5px;
 	padding-left: 12px;
 	@media screen and (min-width: 700px) {
 		min-height: 50px;
+		height: 50px;
 		padding: 10px;
 		padding-left: 15px;
 	}
